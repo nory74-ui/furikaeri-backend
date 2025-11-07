@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 3000;
 
-const client = new OpenAI({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
@@ -16,8 +16,8 @@ app.get("/", (req, res) => {
 
 app.get("/test-openai", async (req, res) => {
   try {
-    const completion = await client.chat.completions.create({
-      model: "gpt-4o-mini",
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o",
       messages: [{ role: "user", content: "こんにちは" }],
     });
     res.json(completion);
